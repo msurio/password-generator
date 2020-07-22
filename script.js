@@ -2,7 +2,7 @@
 var generateBtn = document.querySelector("#generate");
 
 //prompts + confims
-var length = prompt("Please enter how long you want your password");
+var lengthCase = prompt("Please enter how long you want your password");
 var upperCaseBoolean = confirm("Would you like uppercase letters in your password?");
 var lowerCaseBoolean = confirm("Would you like lowercase letters in your password?");
 var numberCaseBoolean = confirm("Would you like numbers in your password?");
@@ -10,37 +10,41 @@ var symbolCaseBoolean = confirm("Would you like special characters in your passw
 
 //assigning values
 var values = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890!@#$%^&*()-_={}[],."
-var  lower = "abcdefghijklmnopqrstuvwxyz"
-var  upper =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-var  numbers = "1234567890"
-var  symbols = "!@#$%^&*()-_={}[],."
+var lower = "abcdefghijklmnopqrstuvwxyz"
+var upper = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+var numbers = "1234567890"
+var symbols = "!@#$%^&*()-_={}[],."
 
 let password = "";
 
 
 function generatePassword() {
   //setting password length
-  if (length < 8) {
+  if (lengthCase < 8) {
     alert("Please enter a value 8 or higher");
     prompt("Please enter how long you want your password");
-  } else if (length > 128) {
+  } else if (lengthCase > 128) {
     alert("please enter a value lower than 128");
     prompt("Please enter how long you want your password");
   }
-  console.log(length); //this works
+  console.log(lengthCase); //this works
 
 
   if (upperCaseBoolean === true && lowerCaseBoolean === true && upperCaseBoolean === true && symbolCaseBoolean === true) {
-    for(var i = 0; i = length; i++){
+    for (var i = 0; i < lengthCase; i++) {
       //letting the empty password field be set with the length inputed by user and randomly filling it with the string
       password = password + values.charAt(Math.floor(Math.random() * Math.floor(values.length - 1)));
-
-      console.log(password);
-      return(password);
+      document.querySelector("#password").value = password
     }
+    console.log(password); //works
+    return (password); //works
+
   }
 
+
 }
+
+
 
 
 
@@ -55,6 +59,4 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", writePassword);
-
-writePassword();
+generateBtn.addEventListener("click", writePassword())
